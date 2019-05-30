@@ -1,0 +1,16 @@
+﻿@model  WebStore.Models.Product.CatalogViewModel
+
+@{ 
+    ViewData["Title"] = "Products"; 
+    Layout = "_Menu";
+}
+
+@section  Advertisement{ 
+    <section id="advertisement">
+        <div class="container">
+            @*<img src="~/images/shop/advertisement.jpg" alt=""/>*@
+        </div>
+    </section>
+}
+
+@await Html.PartialAsync("Partial/_FeaturesItems", Model.Products)

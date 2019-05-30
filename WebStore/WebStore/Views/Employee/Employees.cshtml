@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebStore.Models.EmployeeViewModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>List of employees</h3>
+@if (User.IsInRole("Administrator"))
+{
+    <a asp-action="Edit" class="btn btn-success">Add new employe</a>
+}
+
+<hr />
+<table class="table table-hover">
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Patronymic</th>
+        <th>Age</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Edit"
+                       asp-route-id="@item.ID">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                }
+            </td>
+            <td>@item.FirstName</td>
+            <td>@item.SurName</td>
+            <td>@item.Patronymic</td>
+            <td>@((int.Parse(DateTime.Now.ToString("yyyyMMdd")) - int.Parse(item.Birthday.ToString("yyyyMMdd"))) / 10000)</td>
+            <td><a asp-action="Details" asp-route-id="@item.ID">Details</a></td>
+            <td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ID">
+                        <i class="fa fa-cut"></i>
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+</table>

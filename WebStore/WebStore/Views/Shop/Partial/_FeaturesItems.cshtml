@@ -1,0 +1,29 @@
+﻿@using System.Globalization;
+@model IEnumerable<WebStore.Models.Product.ProductViewModel>
+<div class="features_items">
+    <!--features_items-->
+    <h2 class="title text-center">Products</h2>
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <a asp-action="ProductDetails" asp-route-id="@item.ID"></a>
+                        <img src="~/images/shop/@item.ImageUrl" alt="" />
+                        <h2>@item.Price.ToString("C", new CultureInfo("en-US"))</h2>
+                        <p>@item.Name</p>
+                        <a asp-controller="Shop" asp-action="ProductDetails" asp-route-id="@item.ID" class="btn btn-default product-details"><i class="fa fa-share-square-o"></i>Details</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ID" asp-route-returnUrl="@Context.Request.Path" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </div>
+                </div>
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div><!--features_items-->
